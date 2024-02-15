@@ -2,8 +2,13 @@
 
 import { useState } from "react";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { Locale } from "../../../../i18.config";
 
-const SearchBar = () => {
+const SearchBar = ({
+  lang,
+}: {
+  lang: Locale;
+}) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -31,11 +36,11 @@ const SearchBar = () => {
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Search posts..."
+        placeholder={lang === "en" ? "Search posts..." : "ابحث في المقالات..."}
         className="p-2 border border-gray-300 rounded text-black" 
       />
       <button type="submit" className="p-2 border border-gray-300 rounded">
-        Search
+        {lang === "en" ? "Search" : "البحث"}
       </button>
     </form>
   );

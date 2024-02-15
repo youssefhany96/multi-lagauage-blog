@@ -21,7 +21,7 @@ export default async function Home({
   
   return (
     <div className="max-w-4xl mx-auto">
-      <SearchBar />
+      <SearchBar lang={lang} />
       <CategoriesTags categories={categories} tags={tags} />
       <PostList posts={posts} lang={lang} />
     </div>
