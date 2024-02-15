@@ -23,7 +23,7 @@ export default async function Home({
     <div className="max-w-4xl mx-auto">
       <SearchBar />
       <CategoriesTags categories={categories} tags={tags} />
-      <PostList posts={posts} />
+      <PostList posts={posts} lang={lang} />
     </div>
   );
 }
