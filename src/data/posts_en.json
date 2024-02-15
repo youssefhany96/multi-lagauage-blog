@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "title": "Welcome to Our Blog",
+    "content": "Discover the latest updates, stories, and insights on our blog.",
+    "tags": ["introduction", "welcome"],
+    "category": "General",
+    "language": "en"
+  },
+  {
+    "id": 2,
+    "title": "Exploring Next.js Features",
+    "content": "A deep dive into the features that make Next.js a powerful framework for React development.",
+    "tags": ["Next.js", "React", "development"],
+    "category": "Development",
+    "language": "en"
+  },
+  {
+    "id": 3,
+    "title": "Sustainable Practices in Tech",
+    "content": "How the tech industry is moving towards sustainability and what it means for the future.",
+    "tags": ["sustainability", "tech", "future"],
+    "category": "Sustainability",
+    "language": "en"
+  },
+  {
+    "id": 4,
+    "title": "The Importance of Web Accessibility",
+    "content": "Understanding web accessibility and its significance in today's digital world.",
+    "tags": ["accessibility", "web", "digital"],
+    "category": "Accessibility",
+    "language": "en"
+  },
+  {
+    "id": 5,
+    "title": "Learning Path for Beginner Developers",
+    "content": "A guide to the essential skills and knowledge for starting a career in web development.",
+    "tags": ["learning", "development", "career"],
+    "category": "Education",
+    "language": "en"
+  }
+]
