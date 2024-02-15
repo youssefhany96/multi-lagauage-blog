@@ -5,8 +5,7 @@ import { usePathname } from "next/navigation";
 
 import { i18n } from "../../../../i18.config";
 
-// Use the `use client` directive to mark this as a Client Component
-const LanguageSwitcher = () => {
+ const LanguageSwitcher = () => {
   const pathName = usePathname();
 
   const redirectedPathName = (locale: string) => {

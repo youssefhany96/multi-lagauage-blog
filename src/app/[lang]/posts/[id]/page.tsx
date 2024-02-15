@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Post as PostType } from "@/types"; // Adjust this import based on your actual file structure
-import { getPostById } from "../../../../lib/api"; // Adjust the import based on your actual API function's location
+import { Post as PostType } from "@/types"; 
+import { getPostById } from "../../../../lib/api";
 import { Locale } from "../../../../../i18.config";
 import Link from "next/link";
 
@@ -18,7 +18,7 @@ const PostDetails = ({
   const [post, setPost] = useState<PostType | null>(null);
 
   useEffect(() => {
-    if (!id) return; // Ensure id is present
+    if (!id) return;
     const fetchPost = async () => {
       const fetchedPost = await getPostById(id.toString(), lang);
       if (!fetchedPost) return;
@@ -28,7 +28,7 @@ const PostDetails = ({
     fetchPost();
   }, [id, lang]);
 
-  if (!post) return <p>Loading...</p>; // Display loading state or handle null case as needed
+  if (!post) return <p>Loading...</p>;
 
   return (
     <div className="max-w-4xl mx-auto mt-10">
@@ -52,7 +52,6 @@ const PostDetails = ({
                 </span>
               ))}
           </div>
-          {/* Additional details or elements here */}
           <Link
             href="/"
             className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

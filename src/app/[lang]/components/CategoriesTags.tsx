@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
-const CategoriesTags = ({ categories, tags }) => {
+const CategoriesTags = ({ categories, tags }: { categories: string[], tags: string[] }) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -45,7 +45,7 @@ const CategoriesTags = ({ categories, tags }) => {
           className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
         >
           <option value="">All Categories</option>
-          {categories.map((category) => (
+          {categories.map((category: string) => (
             <option key={category} value={category}>
               {category}
             </option>
@@ -66,44 +66,13 @@ const CategoriesTags = ({ categories, tags }) => {
           className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
         >
           <option value="">All tags</option>
-          {tags.map((tag) => (
+          {tags.map((tag: string) => (
             <option key={tag} value={tag}>
               {tag}
             </option>
           ))}
         </select>
       </div>
-      {/* <fieldset>
-        <legend className="block text-sm font-medium text-gray-700">
-          Tags:
-        </legend>
-        <div className="mt-2 grid grid-cols-2 gap-2">
-          {tags.map((tag) => (
-            <div key={tag} className="flex items-center">
-              <input
-                id={`tag-${tag}`}
-                type="checkbox"
-                value={tag}
-                checked={selectedTags.includes(tag)}
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setSelectedTags([...selectedTags, tag]);
-                  } else {
-                    setSelectedTags(selectedTags.filter((t) => t !== tag));
-                  }
-                }}
-                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-              />
-              <label
-                htmlFor={`tag-${tag}`}
-                className="ml-2 block text-sm text-white"
-              >
-                {tag}
-              </label>
-            </div>
-          ))}
-        </div>
-      </fieldset> */}
     </div>
   );
 };
