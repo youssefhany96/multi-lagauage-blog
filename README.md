@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Multilingual Blog
 
-## Getting Started
+A bilingual English/Arabic blog on the Next.js App Router, with locale-based routing
+and standards-based language negotiation.
 
-First, run the development server:
+## What it does
+
+- Every route is namespaced under a locale segment: `/en/...` and `/ar/...`
+- A visitor arriving without a locale is redirected to their best match, negotiated
+  from the `Accept-Language` header
+- Per-locale posts, categories and tags
+- Search, and a language switcher
+
+## Stack
+
+Next.js App Router, TypeScript, Tailwind CSS, `@formatjs/intl-localematcher` and
+`negotiator` for locale matching.
+
+## Running locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+npm install
+npm run dev    # http://localhost:3000
+npm run build
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Technical decisions
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The locale lives in the URL, not in a cookie or a store
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Pages sit under src/app/[lang]/, so the language is a route parameter. Every page
+renders for a language that's known before rendering starts, each language has its
+own shareable URL, and nothing has to read client state to decide what to display.
+A cookie-based approach gives one URL two meanings depending on who opens it.
 
-## Learn More
+Negotiation is standards-based, not a guess
 
-To learn more about Next.js, take a look at the following resources:
+src/middleware.ts parses the full Accept-Language header with negotiator and
+matches it against the supported locales using @formatjs/intl-localematcher,
+falling back to the configured default. That handles weighted preferences and
+regional variants — ar-EG matching ar — rather than reading the first header
+value and hoping.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Supported locales are declared once, in i18.config.ts, and the Locale type is
+derived from that array. Adding a language is a one-line change that the type system
+then enforces everywhere.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Content is per-locale, not a key-value translation table
 
-## Deploy on Vercel
+posts_en.json and posts_ar.json hold complete articles rather than translated
+strings. UI labels and editorial content are different problems: a translated
+article can have a different structure, a different set of sections, or no
+counterpart at all. Forcing them through one key-value mechanism makes both awkward.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Assumptions and limitations
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Content is local JSON, not a CMS. The data layer in src/lib/api.ts is the
+  seam where a real content source would be swapped in.
+- Two locales. The configuration generalises; the content doesn't yet.
+- No pagination on the post list.
